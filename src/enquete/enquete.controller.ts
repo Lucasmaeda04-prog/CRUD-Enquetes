@@ -1,42 +1,32 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
 } from '@nestjs/common';
 import { EnqueteService } from './enquete.service';
 import { CreateEnqueteDto } from './dto/create-enquete.dto';
-import { UpdateEnqueteDto } from './dto/update-enquete.dto';
-
 @Controller('enquete')
 export class EnqueteController {
-  constructor(private readonly enqueteService: EnqueteService) {}
-
-  @Post()
-  create(@Body() createEnqueteDto: CreateEnqueteDto) {
-    return this.enqueteService.create(createEnqueteDto);
-  }
+  constructor(private enqueteService: EnqueteService) {}
 
   @Get()
-  findAll() {
-    return this.enqueteService.findAll();
+  findAll(): string {
+    return 'Enquestes retornadas com SUCESSO!';
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.enqueteService.findOne(+id);
+  @Post()
+  async createEnquete(@Body() data: CreateEnqueteDto) {
+    return this.enqueteService.createEnquete(data);
   }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateEnqueteDto: UpdateEnqueteDto) {
-    return this.enqueteService.update(+id, updateEnqueteDto);
+  @Patch()
+  updateEnquete(): string {
+    return 'Enquete atualizada com sucesso';
   }
-
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.enqueteService.remove(+id);
+  removeEnquete(@Param('id') id): string {
+    return `Enquete ${id} removido`;
   }
 }
