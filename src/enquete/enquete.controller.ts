@@ -9,17 +9,18 @@ import {
 } from '@nestjs/common';
 import { EnqueteService } from './enquete.service';
 import { CreateEnqueteDto } from './dto/create-enquete.dto';
+import { Enquete } from './entities/enquete.entity';
 @Controller('enquete')
 export class EnqueteController {
   constructor(private enqueteService: EnqueteService) {}
 
   @Get()
-  findAll(): string {
-    return 'Enquestes retornadas com SUCESSO!';
+  async findAll(): Promise<Enquete[]> {
+    return await this.enqueteService.findAll();
   }
   @Post()
-  async createEnquete(@Body() data: CreateEnqueteDto) {
-    return this.enqueteService.createEnquete(data);
+  async createEnquete(@Body() data: CreateEnqueteDto): Promise<Enquete> {
+    return await this.enqueteService.createEnquete(data);
   }
   @Patch()
   updateEnquete(): string {

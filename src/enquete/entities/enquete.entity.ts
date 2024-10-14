@@ -1,5 +1,21 @@
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+@Entity()
 export class Enquete {
-  id_enquete: number;
+  @PrimaryGeneratedColumn({
+    unsigned: true,
+  })
+  id_enquete?: number;
+
+  @Column({
+    length: 256,
+    nullable: false,
+  })
   titulo: string;
-  resposta: string[];
+
+  @Column({
+    type: 'text',
+    array: true,
+  })
+  respostas: string[];
 }
