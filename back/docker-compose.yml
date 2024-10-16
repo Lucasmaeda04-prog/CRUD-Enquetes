@@ -1,23 +1,26 @@
+version: '3.8'  # Definindo a versão do Docker Compose
+
 services:
   pgsql:
-    POSTGRES_USER: pguser
-    POSTGRES_PASSWORD: pgpassword
-    POSTGRES_DB: db_enquetes
-    image: postgres:latest
+    image: postgres:latest  # Imagem do PostgreSQL
+    container_name: pgsql  # Nome do container
+    restart: always  # Reinicia sempre que o container parar
     ports:
-      - '5433:5432'
-    container_name: 'pgsql'
-    restart: always
+      - '5433:5432'  # Mapeando a porta 5433 do host para a 5432 do container
+    environment:
+      POSTGRES_USER: pguser  # Usuário do PostgreSQL
+      POSTGRES_PASSWORD: pgpassword  # Senha do PostgreSQL
+      POSTGRES_DB: db_enquetes  # Nome do banco de dados
     volumes:
-      - pg-data:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql/data  # Persistência dos dados
     env_file:
-      - .env
+      - .env  # Arquivo de variáveis de ambiente (opcional)
 
   adminer:
-    image: adminer
-    restart: always
+    image: adminer  # Imagem do Adminer
+    restart: always  # Reinicia sempre que o container parar
     ports:
-      - 8080:8080
+      - '8080:8080'  # Mapeando a porta 8080 do host para a do container
 
 volumes:
-  pg-data:
+  pg-data:  # Volume para persistência do banco de dados
