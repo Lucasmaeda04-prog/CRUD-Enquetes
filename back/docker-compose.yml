@@ -1,8 +1,11 @@
 services:
   pgsql:
+    POSTGRES_USER: pguser
+    POSTGRES_PASSWORD: pgpassword
+    POSTGRES_DB: db_enquetes
     image: postgres:latest
     ports:
-      - '${DB_PORT}:5432'
+      - '5433:5432'
     container_name: 'pgsql'
     restart: always
     volumes:
