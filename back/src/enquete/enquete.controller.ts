@@ -19,15 +19,19 @@ export class EnqueteController {
     return await this.enqueteService.findAll();
   }
   @Post()
-  async createEnquete(@Body() data: CreateEnqueteDto): Promise<Enquete> {
+  async createEnquete(
+    @Body() data: CreateEnqueteDto,
+  ): Promise<CreateEnqueteDto> {
+    console.log('aqui');
     return await this.enqueteService.createEnquete(data);
   }
-  @Patch()
-  updateEnquete(): string {
-    return 'Enquete atualizada com sucesso';
+  @Patch(':id')
+  async updateEnquete(@Body() data: CreateEnqueteDto, @Param('id') id: number) {
+    return await this.enqueteService.updateEnquete(data, id);
   }
   @Delete(':id')
-  removeEnquete(@Param('id') id): string {
-    return `Enquete ${id} removido`;
+  async removeEnquete(@Param('id') id: number) {
+    console.log('aqui');
+    return await this.enqueteService.removeEnquete(id);
   }
 }
