@@ -13,8 +13,7 @@ services:
       POSTGRES_DB: db_enquetes  # Nome do banco de dados
     volumes:
       - pg-data:/var/lib/postgresql/data  # Persistência dos dados
-    env_file:
-      - .env  # Arquivo de variáveis de ambiente (opcional)
+
 
   adminer:
     image: adminer  # Imagem do Adminer
